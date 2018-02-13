@@ -7,7 +7,11 @@ var routes = function(app, userAgent) {
     var agent = userAgent.parse(req.headers['user-agent']);
 
     // User Story: I can get the IP address, language and operating system for my browser.
-    var ip = req.connection.remoteAddress;
+    var ip = (req.headers['x-forwarded-for'] ||
+     req.connection.remoteAddress ||
+     req.socket.remoteAddress ||
+     req.connection.socket.remoteAddress).split(",")[0];
+
     var language = req.acceptsLanguages('fr', 'es', 'en');
     var userOs = agent.os.toString();
 
