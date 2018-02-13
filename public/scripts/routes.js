@@ -12,11 +12,11 @@ var routes = function(app, userAgent) {
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress).split(",")[0];
 
-    var language = req.acceptsLanguages('fr', 'es', 'en');
+    var language = req.acceptsLanguages('fr', 'es', 'en-US', 'ru', 'ja', 'zh', 'zh-Hans', 'zh-Hant');
     var userOs = agent.os.toString();
 
     user_agent.ipaddress = ip;
-    user_agent.language = language || 'Language not accepted.';
+    user_agent.language = language || 'Language not supported.';
     user_agent.software = userOs;
 
     // console.log(user_agent);
