@@ -10,7 +10,10 @@ var express = require('express'),
     // templating engine to display static webpages
     engines = require('consolidate'),
     // use assert module to handle errors
-    assert = require('assert');
+    assert = require('assert'),
+    // include user agent paser
+    userAgent = require('useragent');
+    userAgent(true);
 
     // convert data to be easily transferred through the web
     app.use(bodyParser.urlencoded({ extended: true}));
@@ -26,7 +29,7 @@ var express = require('express'),
 // require routes module
 var routes = require('./public/scripts/routes.js');
 // execute routes function
-routes(app);
+routes(app, userAgent);
 
 // set port of app to default heroku port number OR local port num
 var port = process.env.PORT || 5000;
